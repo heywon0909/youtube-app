@@ -3,7 +3,7 @@ import React from "react";
 import Item from "../components/Item";
 export default function Video() {
   const getRelatedVideos = async () => {
-    return await fetch(`../data/relatedList.json`)
+    return await fetch(`../data/list.json`)
       .then((res) => res.json())
       .then((data) => {
         console.log("data", data);
@@ -19,15 +19,15 @@ export default function Video() {
   );
   console.log("data", items);
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div class="flex flex-col w-3/5 bg-slate-300">
+    <div className="flex justify-center h-screen">
+      <div class="flex flex-col w-3/5 h-full mt-24">
         {!isLoading &&
           items.map((video) => {
             return (
               <Item
                 video={video}
                 title={video.snippet.title}
-                img={video.snippet.thumbnails.high.url}
+                img={video.snippet.thumbnails.medium.url}
                 key={video.etag}
               />
             );

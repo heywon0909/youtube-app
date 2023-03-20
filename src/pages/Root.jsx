@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 export default function Root() {
     return (
-        <div className="w-screen h-screen">
+        <div className="w-full h-screen">
         <Header />
         <Outlet/> 
         </div>

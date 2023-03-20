@@ -15,14 +15,14 @@ export default function Home() {
   }, [videos]);
   return (
     // <div className="block w-full pt-5">
-    <div className="flex justify-center items-center h-screen p-5">
-      <div className="flex flex-wrap xl:justify-between justify-center w-full h-full mt-10">
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-wrap xl:justify-between justify-center md:justify-center xl:w-11/12 h-full mt-32">
         {videos.map((video) => {
           return (
             <Item
               video={video}
               title={video.snippet.title}
-              img={video.snippet.thumbnails.high.url}
+              img={video.snippet.thumbnails.medium.url}
               key={video.etag}
             />
           );
