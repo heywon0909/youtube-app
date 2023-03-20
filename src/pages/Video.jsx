@@ -20,7 +20,7 @@ export default function Video() {
   console.log("data", items);
   return (
     <div className="flex justify-center items-center h-screen">
-      <div class="flex flex-col w-2/3 bg-slate-300">
+      <div class="flex flex-col w-3/5 bg-slate-300">
         {!isLoading &&
           items.map((video) => {
             return (

@@ -15,7 +15,7 @@ export default function Home() {
   }, [videos]);
   return (
     // <div className="block w-full pt-5">
-    <div class="flex justify-center items-center h-screen p-5">
+    <div className="flex justify-center items-center h-screen p-5">
       <div className="flex flex-wrap xl:justify-between justify-center w-full h-full mt-10">
         {videos.map((video) => {
           return (
