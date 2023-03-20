@@ -21,7 +21,7 @@ export default function Item({ video, title, img }) {
       >
         <img src={img} alt="" className="rounded-lg w-full" />
       </div>
-      <div className="flex p-2 w-auto md:w-14">
+      <div className="flex p-2 w-auto">
         <div className="flex w-8 h-8 bg-red-400 rounded-full shrink-0">
           <img
             src="http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg"
