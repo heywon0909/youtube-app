@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Root from "./pages/Root";
 import NotFoundPage from "./pages/NotFoundPage";
 import Video from "./pages/Video";
+import VideoDetail from './pages/VideoDetail';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/video/:keyword", element: <Video /> },
-      { path: "/video/detail/:keyword", element: <Video /> },
+      { path: "/video/detail/:videoId", element: <VideoDetail/> },
     ],
   },
 ]);
