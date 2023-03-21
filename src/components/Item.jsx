@@ -30,7 +30,9 @@ export default function Item({ video, title, img }) {
           />
         </div>
         <div clas="flex flex-col">
-          <div className="pl-2 h-5 block font-medium font-sans text-base break-words text-ellipsis overflow-hidden">{title}</div>
+          <div className="pl-2 h-5 block font-medium font-sans text-base break-words text-ellipsis overflow-hidden">
+            {title}
+          </div>
           <div className="pl-2 text-sm text-slate-500 font-sans">YTN</div>
           <div className="pl-2 flex text-sm text-slate-500 xl:flex-row flex-col">
             <div class="flex">조회수 107만회</div>

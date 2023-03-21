@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BsYoutube } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 export default function Header() {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
@@ -18,11 +19,14 @@ export default function Header() {
   return (
     <div className="w-screen flex p-2 h-16 bg-white fixed">
       <div className="p-2 ml-10 flex">
-        <BsYoutube size="30" color="red" />
+        <Link to="/">
+          <BsYoutube size="30" color="red" />
+        </Link>
       </div>
       <div className="flex not-italic font-mono text-lg py-2 font-semibold">
-        Youtube
+        <Link to="/"> Youtube</Link>
       </div>
+
       <div className="flex w-full p-2 justify-center border-slate-300">
         <div className="flex w-2/5">
           <input
