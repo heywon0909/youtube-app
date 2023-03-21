@@ -1,10 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 export default function Item({ video, title, img }) {
   console.log("use", useParams());
   const { keyword } = useParams();
   console.log("keywowrd", keyword);
   return (
+    <Link to="/video/detail/1">
     <div
       className={
         keyword
@@ -40,6 +41,7 @@ export default function Item({ video, title, img }) {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      </Link>
   );
 }
