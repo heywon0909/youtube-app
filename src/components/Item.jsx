@@ -1,30 +1,39 @@
 import React from "react";
-import { useParams,Link } from "react-router-dom";
-export default function Item({ video, title, img, id}) {
-  console.log("use", useParams());
-  console.log('id',id)
-  const { keyword } = useParams();
-  
+import { useParams, useNavigate } from "react-router-dom";
+export default function Item({ video, title, img, id }) {
+  const navigate = useNavigate();
+  const { keyword, videoId } = useParams();
+  const goToVideo = () => navigate(`/video/detail/${id}`);
   return (
-    <Link to="/video/detail/{{id}}">
     <div
       className={
         keyword
           ? "flex h-72 sm:h-48 mb-2 w-full"
+          : videoId
+          ? "flex flex-row h-20 mb-2 xl:w-3/5 w-2/5 md:m-2"
           : "flex flex-col h-80  mb-2 w-96 md:m-2"
       }
+      onClick={goToVideo}
     >
       <div
         className={
           keyword
             ? "flex xl:w-96 w-full xl:h-48 h-36 bg-slate-300 rounded-lg"
+            : videoId
+            ? "flex h-auto w-full bg-slate-300 rounded-lg"
             : "flex xl:w-full h-48 bg-slate-300 rounded-lg"
         }
       >
         <img src={img} alt="" className="rounded-lg w-full" />
       </div>
-      <div className="flex p-2 w-auto">
-        <div className="flex w-8 h-8 bg-red-400 rounded-full shrink-0">
+      <div className={videoId ? "flex w-1/5" : "flex p-2 w-auto"}>
+        <div
+          className={
+            videoId
+              ? "flex w-8 h-8 bg-red-400 rounded-full shrink-0 hidden"
+              : "flex w-8 h-8 bg-red-400 rounded-full shrink-0"
+          }
+        >
           <img
             src="http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg"
             alt=""
@@ -42,7 +51,6 @@ export default function Item({ video, title, img, id}) {
           </div>
         </div>
       </div>
-      </div>
-      </Link>
+    </div>
   );
 }
