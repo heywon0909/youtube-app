@@ -29,6 +29,7 @@ export default function Video() {
                 title={video.snippet.title}
                 img={video.snippet.thumbnails.medium.url}
                 key={video.etag}
+                id={video.id.videoId}
               />
             );
           })}

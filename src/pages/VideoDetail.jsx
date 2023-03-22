@@ -1,8 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React,{useEffect} from "react";
 import Item from "../components/Item";
+import { useParams } from 'react-router-dom';
 
 export default function VideoDetail() {
+  const { videoId } = useParams();
+  const url = 'http://www.youtube.com/embed/' + videoId; 
+  useEffect(() => {
+   window.scrollTo({
+			top: 0
+		});
+  }, []);
   const getRelatedVideos = async () => {
     return fetch(`http://localhost:3000/data/list.json`, {
       headers: {
@@ -23,12 +31,12 @@ export default function VideoDetail() {
   return (
     <div className="flex h-screen w-screen justify-center">
       <div className="flex flex-wrap w-5/6">
-        <div className="flex xl:w-4/5 w-screen bg-blue-100 xl:h-4/5 h-auto">
+        <div className="flex xl:w-4/5 w-screen bg-blue-100 xl:h-4/5 mt-20 h-2/5">
           <iframe
             id="player"
             type="text/html"
             title="videoPlayer"
-            src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com"
+            src={url}
             className="w-full"
             frameBorder="0"
           ></iframe>
@@ -42,6 +50,7 @@ export default function VideoDetail() {
                   title={video.snippet.title}
                   img={video.snippet.thumbnails.medium.url}
                   key={video.etag}
+                  id={video.id.videoId}
                 />
               );
             })}

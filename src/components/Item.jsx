@@ -1,11 +1,12 @@
 import React from "react";
 import { useParams,Link } from "react-router-dom";
-export default function Item({ video, title, img }) {
+export default function Item({ video, title, img, id}) {
   console.log("use", useParams());
+  console.log('id',id)
   const { keyword } = useParams();
-  console.log("keywowrd", keyword);
+  
   return (
-    <Link to="/video/detail/1">
+    <Link to="/video/detail/{{id}}">
     <div
       className={
         keyword
