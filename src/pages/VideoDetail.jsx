@@ -41,7 +41,7 @@ export default function VideoDetail() {
             frameBorder="0"
           ></iframe>
         </div>
-        <div className="flex flex-col xl:w-1/5 mt-20 w-screen xl:overflow-y-auto xl:h-4/5 xl:overflow-x-hidden">
+        <div className="flex flex-col xl:w-1/5 mt-20 w-full xl:overflow-y-auto xl:h-4/5 xl:overflow-x-hidden">
           {!isLoading &&
             items.map((video) => {
               return (

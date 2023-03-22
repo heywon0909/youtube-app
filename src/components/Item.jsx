@@ -45,7 +45,13 @@ export default function Item({ video, title, img, id }) {
             {title}
           </div>
           <div className="pl-2 text-sm text-slate-500 font-sans">YTN</div>
-          <div className="pl-2 flex text-sm text-slate-500 xl:flex-row flex-col">
+          <div
+            className={
+              videoId
+                ? "pl-2 flex text-xs text-slate-500 flex-col"
+                : "pl-2 flex text-sm text-slate-500 xl:flex-row flex-col"
+            }
+          >
             <div class="flex">조회수 107만회</div>
             <div class="flex">4일 전 </div>
           </div>
