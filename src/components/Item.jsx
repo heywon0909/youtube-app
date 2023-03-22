@@ -1,18 +1,19 @@
 import React from "react";
-import { useParams,Link } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 export default function Item({ video, title, img, id}) {
   console.log("use", useParams());
   console.log('id',id)
-  const { keyword } = useParams();
-  
+  const { keyword,videoId } = useParams();
+  const navigate = useNavigate();
+  const goVideoDetail = () => navigate(`/video/detail/${id}`)
   return (
-    <Link to="/video/detail/{{id}}">
     <div
       className={
         keyword
           ? "flex h-72 sm:h-48 mb-2 w-full"
-          : "flex flex-col h-80  mb-2 w-96 md:m-2"
+          : videoId ? "flex flex-col mb-2 md:m-2 h-20" :"flex flex-col h-80  mb-2 w-96 md:m-2"
       }
+      onClick={goVideoDetail}
     >
       <div
         className={
@@ -43,6 +44,6 @@ export default function Item({ video, title, img, id}) {
         </div>
       </div>
       </div>
-      </Link>
+    
   );
 }
