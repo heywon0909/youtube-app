@@ -3,9 +3,7 @@ import Item from "../components/Item";
 import { useQuery } from "@tanstack/react-query";
 export default function Home() {
   const getVideos = async () => {
-    return await (
-      await fetch(`http://localhost:3000/data/list.json`)
-    )
+    return await fetch(`http://localhost:3000/data/list.json`)
       .then((res) => res.json())
       .then((data) => {
         const { items } = data;
