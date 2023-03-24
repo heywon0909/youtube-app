@@ -6,7 +6,9 @@ import Home from "./pages/Home";
 import Root from "./pages/Root";
 import NotFoundPage from "./pages/NotFoundPage";
 import Video from "./pages/Video";
-import VideoDetail from './pages/VideoDetail';
+import VideoDetail from "./pages/VideoDetail";
+import { LoadingProvider } from "./context/LoadingContext";
+
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -16,16 +18,18 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/video/:keyword", element: <Video /> },
-      { path: "/video/detail/:videoId", element: <VideoDetail/> },
+      { path: "/video/detail/:videoId", element: <VideoDetail /> },
     ],
   },
 ]);
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={true} />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <LoadingProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={true} />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </LoadingProvider>
   );
 }
 
