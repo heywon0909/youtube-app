@@ -1,9 +1,20 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-export default function Item({ video, title, img, id }) {
+export default function Item({
+  video,
+  title,
+  img,
+  id,
+  publishTime,
+  channelTitle,
+}) {
   const navigate = useNavigate();
   const { keyword, videoId } = useParams();
   const goToVideo = () => navigate(`/video/detail/${id}`);
+  const time = Math.ceil(
+    (new Date(publishTime).getTime() - new Date().getTime()) /
+      (1000 * 60 * 60 * 24)
+  );
   return (
     <div
       className={
@@ -52,7 +63,9 @@ export default function Item({ video, title, img, id }) {
           <div className="pl-2 h-5 block font-medium font-sans text-base break-words text-ellipsis overflow-hidden">
             {title}
           </div>
-          <div className="pl-2 text-sm text-slate-500 font-sans">YTN</div>
+          <div className="pl-2 text-sm text-slate-500 font-sans">
+            {channelTitle}
+          </div>
           <div
             className={
               videoId
@@ -60,8 +73,8 @@ export default function Item({ video, title, img, id }) {
                 : "pl-2 flex text-sm text-slate-500 xl:flex-row flex-col"
             }
           >
-            <div class="flex">조회수 107만회</div>
-            <div class="flex">4일 전 </div>
+            {/* <div className="flex">조회수 107만회</div> */}
+            <div className="flex">{-1 * time}일 전 </div>
           </div>
         </div>
       </div>

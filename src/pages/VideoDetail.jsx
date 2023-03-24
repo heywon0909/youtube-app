@@ -12,7 +12,13 @@ export default function VideoDetail() {
     });
   }, [videoId]);
 
-  const { isLoading, data: items } = useQuery(["related"], getRelatedVideo);
+  const { isLoading, data: items } = useQuery(
+    ["related"],
+    () => getRelatedVideo(videoId),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
   console.log("data", items);
   return (
     <div className="flex h-screen w-screen justify-center">
@@ -37,6 +43,8 @@ export default function VideoDetail() {
                   img={video.snippet.thumbnails.medium.url}
                   key={video.etag}
                   id={video.id.videoId}
+                  publishTime={video.snippet.publishTime}
+                  channelTitle={video.snippet.channelTitle}
                 />
               );
             })}

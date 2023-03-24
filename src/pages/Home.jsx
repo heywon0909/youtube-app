@@ -19,6 +19,8 @@ export default function Home() {
                 img={video.snippet.thumbnails.medium.url}
                 key={video.etag}
                 id={video.id.videoId}
+                publishTime={video.snippet.publishTime}
+                channelTitle={video.snippet.channelTitle}
               />
             );
           })}
