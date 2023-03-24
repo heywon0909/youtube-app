@@ -10,7 +10,7 @@ export default function VideoDetail() {
     window.scrollTo({
       top: 0,
     });
-  }, []);
+  }, [videoId]);
 
   const { isLoading, data: items } = useQuery(["related"], getRelatedVideo);
   console.log("data", items);
