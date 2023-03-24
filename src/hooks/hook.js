@@ -1,6 +1,16 @@
 const userToken = process.env.REACT_APP_USER_TOKEN;
 export const getVideo = async () => {
-  return await fetch(`http://localhost:3000/data/list.json`)
+  // test
+  //   return await fetch(`http://localhost:3000/data/list.json`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const { items } = data;
+  //       return items;
+  //     })
+  //     .catch((error) => console.log("error", error));
+  return await fetch(
+    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=BLACKPINK&key=${userToken}`
+  )
     .then((res) => res.json())
     .then((data) => {
       const { items } = data;
