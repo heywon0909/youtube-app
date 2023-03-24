@@ -12,7 +12,7 @@ export default function Loading() {
     let bar = document.getElementById("bar");
     bar.style.width = 0 + "px";
     bar.style.backgroundColor = "#E5192C";
-    console.log("bar", bar.style.width);
+
     progressInterval = setInterval(function () {
       progress += incrementSpeed;
       bar.style.width = progress + "px";
