@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getRelatedVideo } from "../hooks/hook";
 export default function VideoDetail() {
   const { videoId } = useParams();
-  const url = "http://www.youtube.com/embed/" + videoId;
+  const url = "https://www.youtube.com/embed/" + videoId;
   useEffect(() => {
     window.scrollTo({
       top: 0,
