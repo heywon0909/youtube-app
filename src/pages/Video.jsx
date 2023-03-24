@@ -1,14 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Item from "../components/Item";
 import { getSearchVideo } from "../hooks/hook";
 export default function Video() {
   const { keyword } = useParams();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, [keyword]);
+
   const { isLoading, data: items } = useQuery(["searchVideo", keyword], () =>
     getSearchVideo(keyword)
   );
-  console.log("data", items);
+  //console.log("data", items);
   return (
     <div className="flex justify-center h-screen">
       <div className="flex flex-col w-3/5 h-full mt-24">
