@@ -1,22 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import Item from "../components/Item";
+import { getSearchVideo } from "../hooks/hook";
 export default function Video() {
-  const getRelatedVideos = async () => {
-    return await fetch(`../data/list.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data", data);
-        const { items } = data;
-        return items;
-      })
-      .catch((error) => console.log("error", error));
-  };
-
-  const { isLoading, data: items } = useQuery(
-    ["relatedVideo"],
-    getRelatedVideos
-  );
+  const { isLoading, data: items } = useQuery(["relatedVideo"], getSearchVideo);
   console.log("data", items);
   return (
     <div className="flex justify-center h-screen">

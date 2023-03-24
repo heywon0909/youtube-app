@@ -1,17 +1,9 @@
 import React from "react";
 import Item from "../components/Item";
 import { useQuery } from "@tanstack/react-query";
+import { getVideo } from "../hooks/hook";
 export default function Home() {
-  const getVideos = async () => {
-    return await fetch(`http://localhost:3000/data/list.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        const { items } = data;
-        return items;
-      })
-      .catch((error) => console.log("error", error));
-  };
-  const { isLoading, data: items } = useQuery(["video_list"], getVideos);
+  const { isLoading, data: items } = useQuery(["video_list"], getVideo);
   console.log("data", items);
 
   return (

@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import Item from "../components/Item";
 import { useParams } from "react-router-dom";
-
+import { getRelatedVideo } from "../hooks/hook";
 export default function VideoDetail() {
   const { videoId } = useParams();
   const url = "http://www.youtube.com/embed/" + videoId;
@@ -11,22 +11,8 @@ export default function VideoDetail() {
       top: 0,
     });
   }, []);
-  const getRelatedVideos = async () => {
-    return fetch(`http://localhost:3000/data/list.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data", data);
-        const { items } = data;
-        return items;
-      })
-      .catch((error) => console.log("error", error));
-  };
-  const { isLoading, data: items } = useQuery(["related"], getRelatedVideos);
+
+  const { isLoading, data: items } = useQuery(["related"], getRelatedVideo);
   console.log("data", items);
   return (
     <div className="flex h-screen w-screen justify-center">
