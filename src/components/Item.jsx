@@ -26,7 +26,15 @@ export default function Item({ video, title, img, id }) {
       >
         <img src={img} alt="" className="rounded-lg w-full" />
       </div>
-      <div className={videoId ? "flex w-1/5" : "flex p-2 w-auto"}>
+      <div
+        className={
+          videoId
+            ? "flex w-1/5"
+            : keyword
+            ? "flex p-2 w-1/5 xl:w-auto"
+            : "flex p-2 w-auto"
+        }
+      >
         <div
           className={
             videoId
