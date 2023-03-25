@@ -1,26 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Item from "../components/Item";
+import { getSearchVideo } from "../hooks/hook";
 export default function Video() {
-  const getRelatedVideos = async () => {
-    return await fetch(`../data/list.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("data", data);
-        const { items } = data;
-        return items;
-      })
-      .catch((error) => console.log("error", error));
-  };
+  const { keyword } = useParams();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, [keyword]);
 
-  const { isLoading, data: items } = useQuery(
-    ["relatedVideo"],
-    getRelatedVideos
+  const { isLoading, data: items } = useQuery(["searchVideo", keyword], () =>
+    getSearchVideo(keyword)
   );
-  console.log("data", items);
+  //console.log("data", items);
   return (
     <div className="flex justify-center h-screen">
-      <div class="flex flex-col w-3/5 h-full mt-24">
+      <div className="flex flex-col w-3/5 h-full mt-24">
         {!isLoading &&
           items.map((video) => {
             return (
@@ -30,6 +27,8 @@ export default function Video() {
                 img={video.snippet.thumbnails.medium.url}
                 key={video.etag}
                 id={video.id.videoId}
+                publishTime={video.snippet.publishTime}
+                channelTitle={video.snippet.channelTitle}
               />
             );
           })}
