@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 // import { useLoadingMode } from "../context/LoadingContext";
 import { useLocation } from "react-router-dom";
 
+
 export default function Loading() {
   const { pathname } = useLocation();
-
   useEffect(() => {
+
     let progressInterval = null;
     let progress = 0;
     let incrementSpeed = 20;

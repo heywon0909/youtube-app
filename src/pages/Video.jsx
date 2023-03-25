@@ -14,7 +14,10 @@ export default function Video() {
   const { isLoading, data: items } = useQuery(["searchVideo", keyword], () =>
     getSearchVideo(keyword)
   );
+ 
+ 
   //console.log("data", items);
+  
   return (
     <div className="flex justify-center">
       <div className="flex flex-col w-3/5 sm:w-2/3 h-full mt-24">
@@ -32,7 +35,6 @@ export default function Video() {
               />
             );
           })}
-        {isLoading && <p>isLoading...</p>}
       </div>
     </div>
   );

@@ -3,9 +3,9 @@ import Item from "../components/Item";
 import { useQuery } from "@tanstack/react-query";
 import { getVideo } from "../hooks/hook";
 
+
 export default function Home() {
   const { isLoading, data: items } = useQuery(["video_list"], getVideo);
-
   return (
     // <div className="block w-full pt-5">
     <div className="flex justify-center items-center">
@@ -24,7 +24,6 @@ export default function Home() {
               />
             );
           })}
-        {isLoading && <p>isLoading...</p>}
       </div>
     </div>
     // </div>
