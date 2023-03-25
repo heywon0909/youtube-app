@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { MdPlayCircleOutline } from 'react-icons/md';
 export default function Item({
   video,
   title,
@@ -11,56 +12,61 @@ export default function Item({
   const navigate = useNavigate();
   const { keyword, videoId } = useParams();
   const goToVideo = () => navigate(`/video/detail/${id}`);
-  const time = Math.ceil(
+  const diff = Math.ceil(
     (new Date(publishTime).getTime() - new Date().getTime()) /
-      (1000 * 60 * 60 * 24)
-  );
+    (1000 * 60 * 60 * 24));
+  const time = diff === 0 ? Math.ceil((new Date(publishTime).getTime() - new Date().getTime()) /
+  (1000 * 60 * 60)) * (-1) +'시간 전' : diff * (-1) +'일 전' 
+  useEffect(() => {
+  const item = document.getElementById(`item${id}`);
+    item.addEventListener('mouseover', () => {
+      document.getElementById(`visibility${id}`).style.display = 'block'
+    });
+    item.addEventListener('mouseleave', () => {
+       document.getElementById(`visibility${id}`).style.display = 'none'
+    })
+  
+  
+  
+  })
+  
   return (
     <div
       className={
         keyword
-          ? "flex h-72 sm:h-48 mb-2 w-full"
+          ? "flex xl:h-60 sm:h-48 mb-2 w-full relative"
           : videoId
-          ? "flex flex-row h-20 mb-2 xl:w-3/5 w-2/5 md:m-2"
-          : "flex flex-col h-80  mb-2 w-96 md:m-2"
+          ? "flex flex-row h-1/2 mb-2 xl:w-3/5 w-full md:m-2 relative"
+          : "flex flex-col h-72  mb-2 w-96 md:m-2 relative"
       }
       onClick={goToVideo}
+      id={'item'+id}
     >
       <div
         className={
           keyword
-            ? "flex xl:w-96 w-full xl:h-48 h-36 bg-slate-300 rounded-lg"
+            ? "flex w-auto xl:h-48 h-36 bg-slate-300 rounded-lg relative"
             : videoId
-            ? "flex h-auto w-full bg-slate-300 rounded-lg"
+            ? "flex h-auto w-auto xl:w-full lg:w-2/5 md:w-2/5  bg-slate-300 rounded-lg min-w-fit relative"
             : "flex xl:w-full h-48 bg-slate-300 rounded-lg"
         }
       >
-        <img src={img} alt="" className="rounded-lg w-full" />
+        <img src={img} alt="" className={keyword ? "rounded-lg w-auto" : "rounded-lg w-full"} />
+         <div className={videoId ? "absolute right-0 hidden" : "absolute right-0 hidden"} id={'visibility'+id}>
+          <MdPlayCircleOutline color='gray' size="23"/>
+        </div>  
       </div>
       <div
         className={
           videoId
-            ? "flex w-1/5"
+            ? "flex w-4/5"
             : keyword
-            ? "flex p-2 w-1/5 xl:w-auto"
-            : "flex p-2 w-auto"
+            ? "flex p-2 w-1/5 xl:w-3/5"
+            : "flex pt-2 w-auto"
         }
       >
-        <div
-          className={
-            videoId
-              ? "flex w-8 h-8 bg-red-400 rounded-full shrink-0 hidden"
-              : "flex w-8 h-8 bg-red-400 rounded-full shrink-0"
-          }
-        >
-          <img
-            src="http://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg"
-            alt=""
-            className="w-8 h-8 rounded-full"
-          />
-        </div>
         <div clas="flex flex-col">
-          <div className="pl-2 h-5 block font-medium font-sans text-base break-words text-ellipsis overflow-hidden">
+          <div className={keyword ? "grow-1 pl-2 block font-medium w-auto font-sans whitespace-normal text-base overflow-ellipsis overflow-hidden line-clamp-2":videoId ? "pl-2 block font-medium font-sans break-words  whitespace-normal overflow-ellipsis overflow-hidden line-clamp-2" : "pl-2 xl:h-auto h-5 block font-medium font-sans text-base break-words text-ellipsis overflow-hidden"}>
             {title}
           </div>
           <div className="pl-2 text-sm text-slate-500 font-sans">
@@ -74,7 +80,7 @@ export default function Item({
             }
           >
             {/* <div className="flex">조회수 107만회</div> */}
-            <div className="flex">{-1 * time}일 전 </div>
+            <div className="flex">{time}</div>
           </div>
         </div>
       </div>

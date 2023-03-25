@@ -19,15 +19,15 @@ export default function Header() {
 
   return (
     <>
-      <div className="w-screen h-16 bg-white fixed">
+      <div className="w-screen h-16 bg-white fixed z-10">
         <Loading />
-        <div className="w-screen flex">
+        <div className="w-screen flex p-2">
           <div className="p-2 ml-10 flex">
             <Link to="/">
               <BsYoutube size="30" color="red" />
             </Link>
           </div>
-          <div className="flex not-italic font-mono text-lg py-2 font-semibold">
+          <div className="flex not-italic font-mono text-xl py-2 font-semibold">
             <Link to="/"> Youtube</Link>
           </div>
 

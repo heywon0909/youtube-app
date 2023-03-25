@@ -16,8 +16,8 @@ export default function Video() {
   );
   //console.log("data", items);
   return (
-    <div className="flex justify-center h-screen">
-      <div className="flex flex-col w-3/5 h-full mt-24">
+    <div className="flex justify-center">
+      <div className="flex flex-col w-3/5 sm:w-2/3 h-full mt-24">
         {!isLoading &&
           items.map((video) => {
             return (
