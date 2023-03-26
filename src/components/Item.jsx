@@ -36,8 +36,8 @@ export default function Item({
         keyword
           ? "flex xl:h-60 sm:h-48 mb-2 w-full relative"
           : videoId
-          ? "flex flex-row h-1/2 mb-2 xl:w-3/5 w-full md:m-2 relative"
-          : "flex flex-col h-72  mb-2 w-96 md:m-2 relative"
+          ? "flex flex-row h-1/2 mb-2 xl:w-11/12 w-full md:m-2 relative"
+          : "flex flex-col h-72 mb-2 w-80 m-2 relative"
       }
       onClick={goToVideo}
       id={'item'+id}
@@ -47,7 +47,7 @@ export default function Item({
           keyword
             ? "flex w-auto xl:h-48 h-36 bg-slate-300 rounded-lg relative"
             : videoId
-            ? "flex h-auto w-auto xl:w-full lg:w-2/5 md:w-2/5  bg-slate-300 rounded-lg min-w-fit relative"
+            ? "flex h-auto w-28 lg:w-2/5 md:w-2/5 sm:h-24 md:h-40 xl:h-auto bg-slate-300 rounded-lg xl:w-48 relative"
             : "flex xl:w-full h-48 bg-slate-300 rounded-lg"
         }
       >
@@ -59,7 +59,7 @@ export default function Item({
       <div
         className={
           videoId
-            ? "flex w-4/5"
+            ? "flex  xl:w-full w-4/5"
             : keyword
             ? "flex p-2 w-1/5 xl:w-3/5"
             : "flex pt-2 w-auto"

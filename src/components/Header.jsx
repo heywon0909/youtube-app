@@ -40,6 +40,7 @@ export default function Header() {
                 name="search"
                 onChange={updateKeyword}
                 onKeyDown={searchKeywordByForm}
+                autoComplete="off"
               />
               <button
                 className="w-14 border-3 bg-slate-200 rounded-r-full px-3 text-center hover:bg-slate-300 mr-4"
