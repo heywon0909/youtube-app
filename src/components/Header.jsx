@@ -26,7 +26,7 @@ export default function Header() {
   }, [pathname]);
   return (
     <>
-      <div className="w-ful bg-white fixed z-10">
+      <div className="w-full bg-white fixed z-10">
         <Loading />
         <div className="w-full flex p-2">
           <div className="p-2 ml-10 flex">
