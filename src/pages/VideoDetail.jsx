@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { Item } from "../components/Item";
 import { useParams } from "react-router-dom";
-import { getRelatedVideo } from "../hooks/hook";
+import { getRelatedVideo } from "../api/youtube";
 export default function VideoDetail() {
   const { videoId } = useParams();
   const url = "https://www.youtube.com/embed/" + videoId;
@@ -12,14 +12,14 @@ export default function VideoDetail() {
     });
   }, [videoId]);
 
-  const { isLoading, data: items } = useQuery(
+  const { isLoading, data: videos } = useQuery(
     ["related"],
     () => getRelatedVideo(videoId),
     {
       refetchOnWindowFocus: false,
     }
   );
-  console.log("data", items);
+  console.log("data", videos);
   return (
     <div className="flex h-screen w-screen justify-center">
       <div className="flex flex-wrap w-11/12">
@@ -35,7 +35,7 @@ export default function VideoDetail() {
         </div>
         <div className="flex flex-col xl:w-2/6 xl:mt-20 mt-10 w-full xl:overflow-y-auto xl:h-4/5 xl:overflow-x-hidden">
           {!isLoading &&
-            items.map((video) => {
+            videos.map((video) => {
               return (
                 <Item
                   video={video}
