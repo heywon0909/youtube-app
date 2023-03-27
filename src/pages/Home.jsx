@@ -1,11 +1,12 @@
 import React from "react";
-import Item from "../components/Item";
+import { Item } from "../components/Item";
 import { useQuery } from "@tanstack/react-query";
 import { getVideo } from "../hooks/hook";
 
-
 export default function Home() {
   const { isLoading, data: items } = useQuery(["video_list"], getVideo);
+  console.log("isLoading", isLoading);
+
   return (
     // <div className="block w-full pt-5">
     <div className="flex justify-center items-center">

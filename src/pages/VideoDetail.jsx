@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import Item from "../components/Item";
+import { Item } from "../components/Item";
 import { useParams } from "react-router-dom";
 import { getRelatedVideo } from "../hooks/hook";
 export default function VideoDetail() {
