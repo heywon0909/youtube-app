@@ -48,7 +48,6 @@ export default function VideoDetail() {
                 />
               );
             })}
-          {isLoading && <p>isLoading...</p>}
         </div>
       </div>
     </div>
