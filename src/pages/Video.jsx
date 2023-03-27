@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { Item } from "../components/Item";
 // import Youtube from "../api/youtube";
 import FakeYoutube from '../api/fakeYoutube';
+import { useYoutubeApi } from '../context/YoutubeApiContext';
 
 export default function Video() {
+  const { youtube } = useYoutubeApi();
   const { keyword } = useParams();
   useEffect(() => {
     window.scrollTo({
@@ -13,10 +15,7 @@ export default function Video() {
     });
   }, [keyword]);
 
-  const { isLoading, data: videos } = useQuery(["searchVideo", keyword], () => {
-    const youtube = new FakeYoutube();
-    return youtube.search(keyword);
-  });
+  const { isLoading, data: videos } = useQuery(["searchVideo", keyword], ()=>youtube.search(keyword));
 
   //console.log("data", items);
 

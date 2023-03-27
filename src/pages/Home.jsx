@@ -1,15 +1,11 @@
 import React from "react";
 import { Item } from "../components/Item";
 import { useQuery } from "@tanstack/react-query";
-// import Youtube from '../api/youtube';
-// import { getVideo } from "../api/youtube";
-import FakeYoutube from '../api/fakeYoutube';
+import { useYoutubeApi } from '../context/YoutubeApiContext';
 
 export default function Home() {
-  const { isLoading, data: videos } = useQuery(["video_list"], () => {
-    const youtube = new FakeYoutube();
-    return youtube.search();
-  });
+  const { youtube } = useYoutubeApi();
+  const { isLoading, data: videos } = useQuery(["video_list"], () => youtube.search());
   console.log("isLoading", isLoading);
 
   return (
