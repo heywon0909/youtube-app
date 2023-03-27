@@ -1,30 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsYoutube } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import Loading from "./Loading";
 
 export default function Header() {
+  const { pathname } = useLocation();
+
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
   const updateKeyword = (e) => setKeyword(e.target.value);
   const searchKeyword = () => {
-    navigate(`/video/${keyword}`);
+    navigate(`/videos/${keyword}`);
   };
   const searchKeywordByForm = (e) => {
     if (e.keyCode === 13) {
       searchKeyword();
     }
   };
-
+  useEffect(() => {
+    if (pathname === "/") {
+      setKeyword("");
+      document.getElementById("searchKeyword").value = "";
+    }
+  }, [pathname]);
   return (
     <>
-      <div className="w-screen h-16 bg-white fixed z-10">
+      <div className="w-ful bg-white fixed z-10">
         <Loading />
-        <div className="w-screen flex p-2">
+        <div className="w-full flex p-2">
           <div className="p-2 ml-10 flex">
             <Link to="/">
-              <BsYoutube size="30" color="red" />
+              <BsYoutube size="30" className="text-brand" />
             </Link>
           </div>
           <div className="flex not-italic font-mono text-xl py-2 font-semibold">
@@ -38,6 +45,7 @@ export default function Header() {
                 placeholder="검색"
                 type="text"
                 name="search"
+                id="searchKeyword"
                 onChange={updateKeyword}
                 onKeyDown={searchKeywordByForm}
                 autoComplete="off"

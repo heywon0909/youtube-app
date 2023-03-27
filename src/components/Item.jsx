@@ -5,7 +5,7 @@ export const Item = memo(
   ({ video, title, img, id, publishTime, channelTitle }) => {
     const navigate = useNavigate();
     const { keyword, videoId } = useParams();
-    const goToVideo = () => navigate(`/video/detail/${id}`);
+    const goToVideo = () => navigate(`/videos/watch/${id}`);
     const diff = Math.ceil(
       (new Date(publishTime).getTime() - new Date().getTime()) /
         (1000 * 60 * 60 * 24)
