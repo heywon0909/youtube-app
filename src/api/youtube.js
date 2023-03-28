@@ -1,40 +1,38 @@
-import axios from 'axios';
-const userToken = process.env.REACT_APP_USER_TOKEN;
+import axios from "axios";
 
-export default class Youtube{
-  constructor() {
-    this.httpClient = axios.create({
-      baseURL: 'https://youtube.googleapis.com/youtube/v3',
-      params:{key:userToken}
-    })
+export default class Youtube {
+  constructor(apiClient) {
+    this.apiClient = apiClient;
   }
   async search(keyword) {
     return keyword ? this.#searchByKeyword(keyword) : this.#mostPopular();
   }
   async #searchByKeyword(keyword) {
-    return this.httpClient.get(`/search`, {
-      params: {
-        part: 'snippet',
-        maxResults: 25,
-        q:keyword
-      }
-    }).then((res) => res.data.items)
-    
+    return this.apiClient
+      .search({
+        params: {
+          part: "snippet",
+          maxResults: 25,
+          type: "video",
+          q: keyword,
+        },
+      })
+      .then((res) => res.data.items)
+      .then((items) => items.map((item) => ({ ...item, id: item.id.videoId })));
   }
 
   async #mostPopular() {
-    return this.httpClient.get(`/videos`, {
-      params: {
-        part: 'snippet',
-        chart: 'mostPopular',
-        maxResults: 25
-      }
-    }).then(res=>res.data.items)
+    return this.apiClient
+      .trend_videos({
+        params: {
+          part: "snippet",
+          chart: "mostPopular",
+          maxResults: 25,
+        },
+      })
+      .then((res) => res.data.items);
   }
 }
-
-
-
 
 // export const getVideo = async () => {
 //   // test
@@ -54,12 +52,13 @@ export default class Youtube{
 
 export const getRelatedVideo = async (videoId) => {
   // test
-  return axios.get(`http://localhost:3000/data/list.json`, {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  })
+  return axios
+    .get(`http://localhost:3000/data/list.json`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
     .then((res) => res.data.items)
     .catch((error) => console.log("error", error));
   // return await fetch(

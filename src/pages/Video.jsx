@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Item } from "../components/Item";
 // import Youtube from "../api/youtube";
-import FakeYoutube from '../api/fakeYoutube';
-import { useYoutubeApi } from '../context/YoutubeApiContext';
+import FakeYoutube from "../api/fakeYoutube";
+import { useYoutubeApi } from "../context/YoutubeApiContext";
 
 export default function Video() {
   const { youtube } = useYoutubeApi();
@@ -15,7 +15,9 @@ export default function Video() {
     });
   }, [keyword]);
 
-  const { isLoading, data: videos } = useQuery(["searchVideo", keyword], ()=>youtube.search(keyword));
+  const { isLoading, data: videos } = useQuery(["searchVideo", keyword], () =>
+    youtube.search(keyword)
+  );
 
   //console.log("data", items);
 
@@ -27,12 +29,8 @@ export default function Video() {
             return (
               <Item
                 video={video}
-                title={video.snippet.title}
                 img={video.snippet.thumbnails.medium.url}
                 key={video.etag}
-                id={video.id.videoId}
-                publishTime={video.snippet.publishTime}
-                channelTitle={video.snippet.channelTitle}
               />
             );
           })}

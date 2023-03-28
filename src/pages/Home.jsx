@@ -1,11 +1,13 @@
 import React from "react";
 import { Item } from "../components/Item";
 import { useQuery } from "@tanstack/react-query";
-import { useYoutubeApi } from '../context/YoutubeApiContext';
+import { useYoutubeApi } from "../context/YoutubeApiContext";
 
 export default function Home() {
   const { youtube } = useYoutubeApi();
-  const { isLoading, data: videos } = useQuery(["video_list"], () => youtube.search());
+  const { isLoading, data: videos } = useQuery(["video_list"], () =>
+    youtube.search()
+  );
   console.log("isLoading", isLoading);
 
   return (
@@ -17,12 +19,8 @@ export default function Home() {
             return (
               <Item
                 video={video}
-                title={video.snippet.title}
                 img={video.snippet.thumbnails.medium.url}
                 key={video.etag}
-                id={video.id}
-                publishTime={video.snippet.publishedAt}
-                channelTitle={video.snippet.channelTitle}
               />
             );
           })}

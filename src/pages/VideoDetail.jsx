@@ -39,12 +39,8 @@ export default function VideoDetail() {
               return (
                 <Item
                   video={video}
-                  title={video.snippet.title}
                   img={video.snippet.thumbnails.medium.url}
                   key={video.etag}
-                  id={video.id.videoId}
-                  publishTime={video.snippet.publishTime}
-                  channelTitle={video.snippet.channelTitle}
                 />
               );
             })}
