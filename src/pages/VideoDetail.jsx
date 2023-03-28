@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { Item } from "../components/Item";
 import { useParams } from "react-router-dom";
-import { getRelatedVideo } from "../api/youtube";
+import { useYoutubeApi } from "../context/YoutubeApiContext";
 export default function VideoDetail() {
   const { videoId } = useParams();
   const url = "https://www.youtube.com/embed/" + videoId;
@@ -11,15 +11,15 @@ export default function VideoDetail() {
       top: 0,
     });
   }, [videoId]);
-
+  const { youtube } = useYoutubeApi();
   const { isLoading, data: videos } = useQuery(
     ["related"],
-    () => getRelatedVideo(videoId),
+    () => youtube.related_video(videoId),
     {
       refetchOnWindowFocus: false,
     }
   );
-  console.log("data", videos);
+
   return (
     <div className="flex h-screen w-screen justify-center">
       <div className="flex flex-wrap w-11/12">
