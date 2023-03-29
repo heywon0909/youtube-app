@@ -1,52 +1,40 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
-import { Item } from "../components/Item";
 import { useLocation, useParams } from "react-router-dom";
-import { useYoutubeApi } from "../context/YoutubeApiContext";
+import VideoInfo from "../components/VideoInfo";
+import RelatedVideos from "../components/RelatedVideos";
 export default function VideoDetail() {
   const { videoId } = useParams();
-  const { state: video } = useLocation();
-  console.log("video", video);
-  const url = "https://www.youtube.com/embed/" + videoId;
+  const {
+    state: { video },
+  } = useLocation();
+
+  const { title, channelId, channelTitle, description } = video.snippet;
   useEffect(() => {
     window.scrollTo({
       top: 0,
     });
   }, [videoId]);
-  const { youtube } = useYoutubeApi();
-  const { isLoading, data: videos } = useQuery(
-    ["related"],
-    () => youtube.related_video(videoId),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
 
   return (
     <div className="flex h-screen w-screen justify-center">
       <div className="flex flex-wrap w-11/12">
-        <section className="flex xl:w-4/6 w-screen xl:h-4/5 mt-20 h-2/5 md:h-3/5 p-2">
+        <section className="flex flex-col xl:w-4/6 w-screen xl:h-5/6 mt-20 h-4/6  p-2">
           <iframe
             id="player"
             type="text/html"
-            title="videoPlayer"
-            src={url}
-            className="w-full"
+            title={title}
+            src={`https://www.youtube.com/embed/${videoId}`}
+            className="w-full xl:h-4/5 md:h-4/5 h-3/5"
             frameBorder="0"
-          ></iframe>
+          />
+          <div className="w-auto h-1/4">
+            <h2>{title}</h2>
+            <VideoInfo id={channelId} name={channelTitle}></VideoInfo>
+            <p className="line-clamp-5">{description}</p>
+          </div>
         </section>
-        <div className="flex flex-col xl:w-2/6 xl:mt-20 mt-10 w-full xl:overflow-y-auto xl:h-4/5 xl:overflow-x-hidden">
-          {!isLoading &&
-            videos.map((video) => {
-              return (
-                <Item
-                  video={video}
-                  img={video.snippet.thumbnails.medium.url}
-                  key={video.etag}
-                />
-              );
-            })}
-        </div>
+
+        <RelatedVideos id={video.id}></RelatedVideos>
       </div>
     </div>
   );

@@ -12,4 +12,7 @@ export default class YoutubeClient {
   async trend_videios(params) {
     return this.httpClient.get("videos", params);
   }
+  async channels(params) {
+    return this.httpClient.get("channels", params);
+  }
 }
