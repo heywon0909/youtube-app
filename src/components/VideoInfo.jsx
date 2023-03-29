@@ -11,10 +11,12 @@ export default function VideoInfo({ id, name }) {
       staleTime: 1000 * 60 * 5,
     }
   );
-  console.log("isLoading", isLoading, img);
+
   return (
     <div>
-      {img && <img src={img} alt={name} className="rounded-full w-9 h-9" />}
+      {isLoading && img && (
+        <img src={img} alt={name} className="rounded-full w-9 h-9" />
+      )}
       <p>{name}</p>
     </div>
   );
