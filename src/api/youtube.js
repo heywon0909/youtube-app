@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export default class Youtube {
   constructor(apiClient) {
     this.apiClient = apiClient;
@@ -9,6 +7,16 @@ export default class Youtube {
   }
   async related_video(videoId) {
     return this.#searchByVideoId(videoId);
+  }
+  async channelImageURL(id) {
+    return this.apiClient
+      .channels({
+        params: {
+          part: "snippet",
+          id,
+        },
+      })
+      .then((res) => res.data.items[0].snippet.thumbnails.default.url);
   }
   async #searchByVideoId(videoId) {
     return this.apiClient

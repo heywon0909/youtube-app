@@ -1,0 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { useYoutubeApi } from "../context/YoutubeApiContext";
+
+export default function VideoInfo({ id, name }) {
+  const { youtube } = useYoutubeApi();
+  const { isLoading, data: img } = useQuery(
+    ["channelImg", id],
+    () => youtube.channelImageURL(id),
+    {
+      staleTime: 1000 * 60 * 5,
+    }
+  );
+  console.log("isLoading", isLoading, img);
+  return (
+    <div>
+      {img && <img src={img} alt={name} />}
+      <p>{name}</p>
+    </div>
+  );
+}

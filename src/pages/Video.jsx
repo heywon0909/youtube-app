@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Item } from "../components/Item";
 // import Youtube from "../api/youtube";
-import FakeYoutube from "../api/fakeYoutube";
 import { useYoutubeApi } from "../context/YoutubeApiContext";
 
 export default function Video() {
@@ -15,8 +14,12 @@ export default function Video() {
     });
   }, [keyword]);
 
-  const { isLoading, data: videos } = useQuery(["searchVideo", keyword], () =>
-    youtube.search(keyword)
+  const { isLoading, data: videos } = useQuery(
+    ["searchVideo", keyword],
+    () => youtube.search(keyword),
+    {
+      staleTime: 1000 * 60 * 1,
+    }
   );
 
   return (
