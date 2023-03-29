@@ -8,7 +8,6 @@ export default function Home() {
   const { isLoading, data: videos } = useQuery(["video_list"], () =>
     youtube.search()
   );
-  console.log("isLoading", isLoading);
 
   return (
     // <div className="block w-full pt-5">

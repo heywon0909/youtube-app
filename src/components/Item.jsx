@@ -8,7 +8,8 @@ export const Item = memo(({ video, img }) => {
   const { publishedAt, channelTitle, title } = video.snippet;
 
   const { keyword, videoId } = useParams();
-  const goToVideo = () => navigate(`/videos/watch/${video.id}`);
+  const goToVideo = () =>
+    navigate(`/videos/watch/${video.id}`, { state: { video } });
 
   useEffect(() => {
     const item = document.getElementById(`item${video.id}`);
